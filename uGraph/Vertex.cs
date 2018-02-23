@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace uGraph.Core
+namespace uGraph
 {
     public class Vertex<TVertex, TEdge>
     {
@@ -9,7 +9,7 @@ namespace uGraph.Core
 
         public TVertex Info { get; set; }
 
-        public List<Edge<TVertex,TEdge>> Edges { get; private set; }
+        public List<Edge<TVertex, TEdge>> Edges { get; private set; }
 
         internal bool Visited { get; set; }
 
@@ -18,6 +18,11 @@ namespace uGraph.Core
             Id = Guid.NewGuid();
             Edges = new List<Edge<TVertex, TEdge>>();
             Visited = false;
+        }
+
+        public override string ToString()
+        {
+            return $"Id:{Id} Info:" + Info?.ToString();
         }
     }
 }
