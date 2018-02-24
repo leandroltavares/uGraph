@@ -9,7 +9,7 @@ namespace uGraph.Test
         public void WhenNewGraphIsCreatedThenVertexCountShouldBeZero()
         {
             Graph<object, object> graph = new Graph<object, object>();
-            Assert.Equal(0, graph.VertexCount);
+            Assert.Equal(1, graph.VertexCount);
         }
 
         [Fact]
