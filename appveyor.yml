@@ -27,7 +27,7 @@ after_build:
 test:
   assemblies:
     only:
-      - '*.Tests.dll'
+      - '*.Test.dll'
   categories:
     except:
       - Ignore
