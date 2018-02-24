@@ -24,13 +24,13 @@ after_build:
 # name: uGraph
 # type: WebDeployPackage
 # clone_depth: 1
-test:
-  assemblies:
-    only:
-      - '**\*.Test.dll'
-  categories:
-    except:
-      - Ignore
+# test:
+#   assemblies:
+#     only:
+#       - '**\*.Test.dll'
+#   categories:
+#     except:
+#       - Ignore
 # test_script:
 # # restore packages for our unit tests
 #   - cmd: dotnet restore ./uGraph.Test/uGraph.Test.csproj --verbosity m
