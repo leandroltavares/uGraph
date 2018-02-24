@@ -24,16 +24,19 @@ after_build:
 # name: uGraph
 # type: WebDeployPackage
 # clone_depth: 1
+test:
+  assemblies:
+    only:
+      - '*.Tests.dll'
+  categories:
+    except:
+      - Ignore
 # test_script:
 # # restore packages for our unit tests
 #   - cmd: dotnet restore ./uGraph.Test/uGraph.Test.csproj --verbosity m
 # # run the unit tests (requires changing into the test directory)
 #   - cmd: cd uGraph.Test
 #   - cmd: dotnet xunit
-test:
-  categories:
-    except:
-      - Ignore
 on_finish :
 # any cleanup in here
 deploy: off
