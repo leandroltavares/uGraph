@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<package >
+  <metadata>
+    <id>$id$</id>
+    <version>$version$</version>
+    <title>uGraph</title>
+    <authors>Leandro Luciani Tavares</authors>
+    <owners>Leandro Luciani Tavares</owners>
+    <licenseUrl>https://github.com/leandroltavares/uGraph/blob/master/LICENSE</licenseUrl>
+    <projectUrl>https://github.com/leandroltavares/uGraph</projectUrl>
+    <iconUrl></iconUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>Lightweight generic Graph implementation in C#</description>
+    <releaseNotes> </releaseNotes>
+    <copyright>Copyright 2018</copyright>
+    <tags>Graph Generic Traversal</tags>
+  </metadata>
+</package>
