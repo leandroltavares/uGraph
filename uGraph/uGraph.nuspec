@@ -2,7 +2,7 @@
 <package >
   <metadata>
     <id>uGraph</id>
-    <version>$version$</version>
+    <version>0.0.1</version>
     <title>uGraph</title>
     <authors>Leandro Luciani Tavares</authors>
     <owners>Leandro Luciani Tavares</owners>
