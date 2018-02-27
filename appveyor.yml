@@ -14,9 +14,9 @@ before_build:
   - cmd: dotnet --version
 # Display minimal restore text
   - cmd: dotnet restore ./uGraph.sln --verbosity m
-build_script:
+#build_script:
 # output will be in ./src/bin/debug/netcoreapp1.1/publish
-  - cmd: dotnet publish ./uGraph.sln
+#  - cmd: dotnet publish ./uGraph.sln
 after_build:
 # For once the build has completed
 # artifacts:
@@ -26,13 +26,13 @@ after_build:
 # clone_depth: 1
 # before_test:
 #   - echo Starting Tests
-test:
-  assemblies:
-    only:
-      - '**\*.Test.dll'
-  categories:
-    except:
-      - Ignore
+#test:
+#  assemblies:
+#    only:
+#      - '**\*.Test.dll'
+#  categories:
+#    except:
+#      - Ignore
 # after_test:
 #   - echo Tests finished
 # test_script:
