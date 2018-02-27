@@ -38,7 +38,7 @@ after_build:
 # test_script:
   # - cmd: %xunit20%\xunit.console 'C:\projects\ugraph\uGraph.Test\bin\Release\netcoreapp2.0\uGraph.Test.dll' -appveyor
 after_test:
-   - cmd: dotnet nuget pack uGraph\uGraph.nuspec
+   - cmd: nuget pack uGraph\uGraph.nuspec
 artifacts:
   - path: '.\uGraph\bin\Release\netstandard2.0\uGraph.dll'
     name: uGraph.dll
