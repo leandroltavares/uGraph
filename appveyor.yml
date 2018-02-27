@@ -40,7 +40,7 @@ after_build:
 # after_test:
 #   - ps: pack.ps1
 artifacts:
-  - path: '.\uGraph\bin\Release\netcoreapp2.0\uGraph.dll'
+  - path: '.\uGraph\bin\Release\netstandard2.0\uGraph.dll'
     name: uGraph.dll
   - path: '**\*.nupkg'
 deploy:
