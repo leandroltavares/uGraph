@@ -26,13 +26,13 @@ after_build:
 # clone_depth: 1
 # before_test:
 #   - echo Starting Tests
-test:
-  assemblies:
-    only:
+#test:
+#  assemblies:
+#    only:
       - '**\*.Test.dll'
-  categories:
-    except:
-      - Ignore
+#  categories:
+#    except:
+#      - Ignore
 # after_test:
 #   - echo Tests finished
 # test_script:
