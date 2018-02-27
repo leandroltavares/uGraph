@@ -36,7 +36,7 @@ test:
 # after_test:
 #   - echo Tests finished
 test_script:
-  - cmd: %xunit20%\xunit.console 'C:\projects\ugraph\uGraph.Test\bin\Release\netcoreapp2.0\uGraph.Test.dll' -appveyor
+  - ps: %xunit20%\xunit.console "C:\projects\ugraph\uGraph.Test\bin\Release\netcoreapp2.0\uGraph.Test.dll" -appveyor
 
 on_finish :
 # any cleanup in here
