@@ -8,7 +8,7 @@
     <owners>leandroltavares</owners>
     <licenseUrl>https://github.com/leandroltavares/uGraph/blob/master/LICENSE</licenseUrl>
     <projectUrl>https://github.com/leandroltavares/uGraph</projectUrl>
-    <iconUrl></iconUrl>
+    <iconUrl>https://github.com/leandroltavares/uGraph/blob/master/icon.png</iconUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>Lightweight generic Graph implementation in C#</description>
     <releaseNotes> </releaseNotes>
