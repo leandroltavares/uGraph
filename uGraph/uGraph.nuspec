@@ -2,13 +2,13 @@
 <package >
   <metadata>
     <id>uGraph</id>
-    <version>0.0.1</version>
+    <version>0.0.2</version>
     <title>uGraph</title>
     <authors>Leandro Luciani Tavares</authors>
     <owners>leandroltavares</owners>
     <licenseUrl>https://github.com/leandroltavares/uGraph/blob/master/LICENSE</licenseUrl>
     <projectUrl>https://github.com/leandroltavares/uGraph</projectUrl>
-    <iconUrl>https://github.com/leandroltavares/uGraph/blob/master/icon.png</iconUrl>
+    <iconUrl>https://github.com/leandroltavares/uGraph/blob/master/icon.png?raw=true</iconUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>Lightweight generic Graph implementation in C#</description>
     <releaseNotes> </releaseNotes>
