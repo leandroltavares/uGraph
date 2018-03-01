@@ -17,6 +17,14 @@ namespace uGraph
 
         private readonly HashSet<Guid> verticesSet;
 
+        public IReadOnlyList<Vertex<TVertex, TEdge>> Vertices
+        {
+            get
+            {
+                return vertices.AsReadOnly();
+            }
+        }
+
         public int VertexCount { get { return verticesSet.Count; } }
 
         public int EdgeCount { get; set; }
@@ -56,6 +64,26 @@ namespace uGraph
             return edge;
         }
 
+        public Edge<TVertex, TEdge> AddEdge<T>(T origin, T destination, TEdge info) where T : TVertex, IEquatable<TVertex>
+        {
+            var originVertex = FirstOrDefault(v => ((IEquatable<T>)(v)).Equals(origin));
+
+            if (originVertex == null)
+                throw new ArgumentNullException(nameof(originVertex));
+
+            var destinationVertex = FirstOrDefault(v => ((IEquatable<T>)(v)).Equals(destination));
+
+            if (destinationVertex == null)
+                throw new ArgumentNullException(nameof(destinationVertex));
+
+            return AddEdge(originVertex, destinationVertex, info);
+        }
+
+        public Vertex<TVertex, TEdge> FirstOrDefault(Func<TVertex, bool> predicate)
+        {
+            return vertices.FirstOrDefault(v => predicate(v.Info));
+        }
+
         public bool Contains<T>(T value) where T : TVertex, IEquatable<TVertex>
         {
             return vertices.Any(v => v.Info.Equals(value));
@@ -78,17 +106,19 @@ namespace uGraph
 
         private void ClearVisitedVertices()
         {
-            foreach(var vertex in vertices)
+            foreach (var vertex in vertices)
             {
                 vertex.Visited = false;
             }
         }
 
         /// <summary>
-        /// Depth-first walk
+        /// Depth-first traversal
         /// </summary>
-        public void DFW(Vertex<TVertex, TEdge> initialVertex, Action<Vertex<TVertex, TEdge>> action)
+        public void DFT(Vertex<TVertex, TEdge> initialVertex, Action<Vertex<TVertex, TEdge>> action)
         {
+            if (initialVertex == null)
+                throw new ArgumentNullException(nameof(initialVertex));
 
             if (action == null)
                 throw new ArgumentNullException(nameof(action));
@@ -99,7 +129,7 @@ namespace uGraph
 
             stack.Push(initialVertex);
 
-            while(stack.Count > 0)
+            while (stack.Count > 0)
             {
                 var currentVertex = stack.Pop();
 
@@ -109,7 +139,7 @@ namespace uGraph
 
                     action(currentVertex);
 
-                    foreach(var edge in currentVertex.Edges)
+                    foreach (var edge in currentVertex.Edges)
                     {
                         stack.Push(edge.Destination);
                     }
