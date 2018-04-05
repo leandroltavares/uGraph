@@ -104,6 +104,38 @@ namespace uGraph
             return vertices.GetEnumerator();
         }
 
+        //#region Equality
+
+        //public override int GetHashCode()
+        //{
+        //    unchecked
+        //    {
+        //        ulong hash = 2166136261;
+
+        //        foreach(var vertex in vertices)
+        //            hash = (hash * 16777619) ^ (ulong)vertices.GetHashCode();
+
+        //        return (int)hash;
+        //    }
+        //}
+
+        //public bool Equals(Graph<TVertex, TEdge> other)
+        //{
+        //    if (other == null)
+        //        return false;
+
+        //    foreach(var vertex in vertices)
+        //    {
+        //        if(vert)
+        //    }
+
+        //    return false;
+        //}
+        
+        //#endregion
+
+        #region Private Methods
+
         private void ClearVisitedVertices()
         {
             foreach (var vertex in vertices)
@@ -112,10 +144,16 @@ namespace uGraph
             }
         }
 
+        #endregion
+
+        #region Traversal
+
         /// <summary>
         /// Depth-first traversal
+        /// <paramref name="initialVertex">Initial vertex of the traversal</paramref>
+        /// <paramref name="action">Action to be executed foreach node</paramref>
         /// </summary>
-        public void DFT(Vertex<TVertex, TEdge> initialVertex, Action<Vertex<TVertex, TEdge>> action)
+        public void DepthFirstTraversal(Vertex<TVertex, TEdge> initialVertex, Action<Vertex<TVertex, TEdge>> action)
         {
             if (initialVertex == null)
                 throw new ArgumentNullException(nameof(initialVertex));
@@ -146,5 +184,44 @@ namespace uGraph
                 }
             }
         }
+
+        /// <summary>
+        /// Breadth-first traversal
+        /// <paramref name="initialVertex">Initial vertex of the traversal</paramref>
+        /// <paramref name="action">Action to be executed foreach node</paramref>
+        /// </summary>
+        public void BreadthFirstTraversal(Vertex<TVertex, TEdge> initialVertex, Action<Vertex<TVertex, TEdge>> action)
+        {
+            if (initialVertex == null)
+                throw new ArgumentNullException(nameof(initialVertex));
+
+            if (action == null)
+                throw new ArgumentNullException(nameof(action));
+
+            Queue<Vertex<TVertex, TEdge>> queue = new Queue<Vertex<TVertex, TEdge>>();
+
+            ClearVisitedVertices();
+
+            queue.Enqueue(initialVertex);
+
+            while (queue.Count > 0)
+            {
+                var currentVertex = queue.Dequeue();
+
+                if (!currentVertex.Visited)
+                {
+                    currentVertex.Visited = true;
+
+                    action(currentVertex);
+
+                    foreach (var edge in currentVertex.Edges)
+                    {
+                        queue.Enqueue(edge.Destination);
+                    }
+                }
+            }
+        }
+
+        #endregion
     }
 }

@@ -1,35 +1,33 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 using Xunit;
 
 namespace uGraph.Test
 {
-    public class DFTTest
+    public class BreadthFirstTraversalTest
     {
         [Fact]
-        public void DFTWithNullInitialVertexArgumentShouldThrowArgumentNullException()
+        public void BFTWithNullInitialVertexArgumentShouldThrowArgumentNullException()
         {
             Graph<object, object> graph = new Graph<object, object>();
 
             string output = string.Empty;
 
-            Assert.Throws<ArgumentNullException>(() => graph.DFT(null, (v) => output += v.Info.ToString()));
+            Assert.Throws<ArgumentNullException>(() => graph.BreadthFirstTraversal(null, (v) => output += v.Info.ToString()));
         }
 
         [Fact]
-        public void DFTWithNullActionArgumentShouldThrowArgumentNullException()
+        public void BFTWithNullActionArgumentShouldThrowArgumentNullException()
         {
             Graph<object, object> graph = new Graph<object, object>();
             graph.AddVertex(new object());
 
             var firstVertex = graph.Vertices[0];
 
-            Assert.Throws<ArgumentNullException>(() => graph.DFT(firstVertex, null));
+            Assert.Throws<ArgumentNullException>(() => graph.BreadthFirstTraversal(firstVertex, null));
         }
 
         [Fact]
-        public void DFTDirectSampleTest1()
+        public void BFTDirectSampleTest1()
         {
             Graph<int, object> graph = new Graph<int, object>();
 
@@ -49,13 +47,13 @@ namespace uGraph.Test
 
             string output = string.Empty;
 
-            graph.DFT(firstVertex, (v) => output += v.Info.ToString());
+            graph.DepthFirstTraversal(firstVertex, (v) => output += v.Info.ToString());
 
             Assert.Equal("0231", output);
         }
 
         [Fact]
-        public void DFTUndirectSampleTest2()
+        public void BFTUndirectSampleTest2()
         {
             Graph<char, object> graph = new Graph<char, object>();
 
@@ -73,25 +71,25 @@ namespace uGraph.Test
             graph.AddEdge('E', 'F', null);
 
             //Making graph undirected
-            graph.AddEdge('B','A', null);
-            graph.AddEdge('D','B', null);
-            graph.AddEdge('F','B', null);
-            graph.AddEdge('C','A', null);
-            graph.AddEdge('G','C', null);
-            graph.AddEdge('E','A', null);
-            graph.AddEdge('F','E', null);
+            graph.AddEdge('B', 'A', null);
+            graph.AddEdge('D', 'B', null);
+            graph.AddEdge('F', 'B', null);
+            graph.AddEdge('C', 'A', null);
+            graph.AddEdge('G', 'C', null);
+            graph.AddEdge('E', 'A', null);
+            graph.AddEdge('F', 'E', null);
 
             var firstVertex = graph.FirstOrDefault(v => v == 'A');
 
             string output = string.Empty;
 
-            graph.DFT(firstVertex, (v) => output += v.Info.ToString());
+            graph.BreadthFirstTraversal(firstVertex, (v) => output += v.Info.ToString());
 
-            Assert.Equal("AEFBDCG", output);
+            Assert.Equal("ABCEDFG", output);
         }
 
         [Fact]
-        public void DFTUndirectSampleTest3()
+        public void BFTUndirectSampleTest3()
         {
             Graph<char, object> graph = new Graph<char, object>();
 
@@ -121,9 +119,9 @@ namespace uGraph.Test
 
             string output = string.Empty;
 
-            graph.DFT(firstVertex, (v) => output += v.Info.ToString());
+            graph.BreadthFirstTraversal(firstVertex, (v) => output += v.Info.ToString());
 
-            Assert.Equal("GCAEFBD", output);
+            Assert.Equal("GCABEDF", output);
         }
     }
 }
