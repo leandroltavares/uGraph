@@ -37,8 +37,14 @@ after_build:
 #   - echo Tests finished
 # test_script:
   # - cmd: %xunit20%\xunit.console 'C:\projects\ugraph\uGraph.Test\bin\Release\netcoreapp2.0\uGraph.Test.dll' -appveyor
+test_script:
+ - .\packages\OpenCover.4.6.519\tools\OpenCover.Console.exe -register:user -target:"%xunit20%\xunit.console.x86.exe" -targetargs:".\uGraph\bin\Release\netstandard2.0\uGraph.Test.dll -noshadow" -output:"coverage.xml" -filter:"+[uGraph*]* -[uGraph.Test*]*"
 after_test:
    - cmd: nuget pack uGraph\uGraph.nuspec
+   - ps: |
+      $env:PATH = 'C:\msys64\usr\bin;' + $env:PATH
+      Invoke-WebRequest -Uri 'https://codecov.io/bash' -OutFile codecov.sh
+      bash codecov.sh -f "coverage.xml" -t 7afdbb96-e7d0-447a-a473-4af689ccfa40
 artifacts:
   - path: '.\uGraph\bin\Release\netstandard2.0\uGraph.dll'
     name: uGraph.dll
