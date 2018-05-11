@@ -14,6 +14,8 @@ before_build:
   - cmd: dotnet --version
 # Display minimal restore text
   - cmd: dotnet restore ./uGraph.sln --verbosity m
+  - choco install opencover.portable
+  - choco install codecov
 #build_script:
 # output will be in ./src/bin/debug/netcoreapp1.1/publish
 #  - cmd: dotnet publish ./uGraph.sln
@@ -38,7 +40,7 @@ after_build:
 # test_script:
   # - cmd: %xunit20%\xunit.console 'C:\projects\ugraph\uGraph.Test\bin\Release\netcoreapp2.0\uGraph.Test.dll' -appveyor
 test_script:
- - .\packages\OpenCover.4.6.519\tools\OpenCover.Console.exe -register:user -target:"%xunit20%\xunit.console.x86.exe" -targetargs:".\uGraph\bin\Release\netstandard2.0\uGraph.Test.dll -noshadow" -output:"coverage.xml" -filter:"+[uGraph*]* -[uGraph.Test*]*"
+ - OpenCover.Console.exe -register:user -target:"%xunit20%\xunit.console.x86.exe" -targetargs:".\uGraph\bin\Release\netstandard2.0\uGraph.Test.dll -noshadow" -output:"coverage.xml" -filter:"+[uGraph*]* -[uGraph.Test*]*"
 after_test:
    - cmd: nuget pack uGraph\uGraph.nuspec
    - ps: |
