@@ -119,19 +119,49 @@ namespace uGraph
         //    }
         //}
 
-        //public bool Equals(Graph<TVertex, TEdge> other)
-        //{
-        //    if (other == null)
-        //        return false;
+        public bool Equals(Graph<TVertex, TEdge> other)
+        {
+            if (other == null)
+                return false;
 
-        //    foreach(var vertex in vertices)
-        //    {
-        //        if(vert)
-        //    }
+            if (Object.ReferenceEquals(this, other))
+                return true;
 
-        //    return false;
-        //}
-        
+            if (this.VertexCount != other.VertexCount)
+                return false;
+
+            var thisOrderedVertices = this.vertices.GroupBy(v => v.Edges.Count());
+            var otherOrderedVertices = other.vertices.GroupBy(v => v.Edges.Count());
+
+            HashSet<Vertex<TVertex, TEdge>> otherGraphVisitedVertices = new HashSet<Vertex<TVertex, TEdge>>();
+
+            foreach (var vertexGroupPair in thisOrderedVertices.Zip(otherOrderedVertices, (first, second) => (first, second)))
+            {
+                foreach (var originVertex in vertexGroupPair.first)
+                {
+                    var matchingDestinationVertex =
+                        vertexGroupPair.second.FirstOrDefault(destinationVertex => destinationVertex.Info.Equals(originVertex.Info)
+                                                              && !otherGraphVisitedVertices.Contains(destinationVertex)
+                                                              && originVertex.Edges.Count() == destinationVertex.Edges.Count());
+
+                    if (matchingDestinationVertex != null)
+                    {
+
+                        otherGraphVisitedVertices.Add(matchingDestinationVertex);
+                    }
+                    else
+                    {
+                        return false;
+                    }
+                }
+            }
+
+            if (other.vertices.Count != otherGraphVisitedVertices.Count)
+                return false;
+
+            return true;
+        }
+
         //#endregion
 
         #region Private Methods

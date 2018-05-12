@@ -15,4 +15,7 @@
   <ItemGroup>
     <ProjectReference Include="..\uGraph\uGraph.csproj" />
   </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Util\" />
+  </ItemGroup>
 </Project>

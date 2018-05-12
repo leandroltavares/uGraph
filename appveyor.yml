@@ -40,7 +40,7 @@ after_build:
 # test_script:
   # - cmd: %xunit20%\xunit.console 'C:\projects\ugraph\uGraph.Test\bin\Release\netcoreapp2.0\uGraph.Test.dll' -appveyor
 test_script:
- - OpenCover.Console.exe -register:user -target:"%xunit20%\xunit.console.x86.exe" -targetargs:"C:\projects\ugraph\uGraph.Test\bin\Release\netcoreapp2.0\uGraph.Test.dll -noshadow" -output:"coverage.xml" -filter:"+[uGraph*]* -[uGraph.Test*]*"
+ - OpenCover.Console.exe -register:user -target:"%xunit20%\xunit.console.x86.exe" -targetargs:".\uGraph\bin\Release\netstandard2.0\uGraph.Test.dll -noshadow" -output:"coverage.xml" -filter:"+[uGraph*]* -[uGraph.Test*]*"
 after_test:
    - cmd: nuget pack uGraph\uGraph.nuspec
    - ps: |
