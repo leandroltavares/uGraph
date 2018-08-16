@@ -252,6 +252,61 @@ namespace uGraph
             }
         }
 
+        public bool BidirectionalSearch(Vertex<TVertex, TEdge> initialVertex, Vertex<TVertex, TEdge> targetVertex)//, out List<Vertex<TVertex, TEdge>> vertices)
+        {
+            if (initialVertex == null)
+                throw new ArgumentNullException(nameof(initialVertex));
+
+            if (targetVertex == null)
+                throw new ArgumentNullException(nameof(targetVertex));
+
+            Queue<Vertex<TVertex, TEdge>> queueA = new Queue<Vertex<TVertex, TEdge>>();
+            Queue<Vertex<TVertex, TEdge>> queueB = new Queue<Vertex<TVertex, TEdge>>();
+            HashSet<Vertex<TVertex, TEdge>> visitedA = new HashSet<Vertex<TVertex, TEdge>>();
+            HashSet<Vertex<TVertex, TEdge>> visitedB = new HashSet<Vertex<TVertex, TEdge>>();
+
+            visitedA.Add(initialVertex);
+            visitedB.Add(targetVertex);
+
+            queueA.Enqueue(initialVertex);
+            queueB.Enqueue(targetVertex);
+
+            while (queueA.Count > 0 || queueB.Count > 0)
+            {
+                if (pathExistsBidirectionalHelper(queueA, visitedA, visitedB))
+                {
+                    return true;
+                }
+                if (pathExistsBidirectionalHelper(queueB, visitedB, visitedA))
+                {
+                    return true;
+                }
+            }
+
+            return false;
+        }
+
+        private static bool pathExistsBidirectionalHelper(Queue<Vertex<TVertex, TEdge>> queue, HashSet<Vertex<TVertex, TEdge>> visitedFromThisSide, HashSet<Vertex<TVertex, TEdge>> visitedFromThatSide)
+        {
+            if (queue.Count > 0)
+            {
+                Vertex<TVertex, TEdge> next = queue.Dequeue();
+
+                foreach (var adjacent in next.Edges.Select(s => s.Destination))
+                {
+                    if (visitedFromThatSide.Contains(adjacent))
+                    {
+                        return true;
+                    }
+                    else if (visitedFromThisSide.Add(adjacent))
+                    {
+                        queue.Enqueue(adjacent);
+                    }
+                }
+            }
+            return false;
+        }
+
         #endregion
     }
 }
