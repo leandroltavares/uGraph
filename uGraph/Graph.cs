@@ -11,7 +11,7 @@ namespace uGraph
     /// </summary>
     /// <typeparam name="TVertex"></typeparam>
     /// <typeparam name="TEdge"></typeparam>
-    public class Graph<TVertex, TEdge> : IEnumerable<Vertex<TVertex, TEdge>>
+    public partial class Graph<TVertex, TEdge> : IEnumerable<Vertex<TVertex, TEdge>>
     {
         private List<Vertex<TVertex, TEdge>> vertices;
 
